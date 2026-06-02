@@ -29,14 +29,8 @@ class EmployeeInfolist
 
                                 TextEntry::make('employee_no')
                                     ->label('NIK (Nomor Induk Karyawan)')
-                                    ->copyable() // Memudahkan admin copy NIK
+                                    ->copyable()
                                     ->icon('heroicon-m-finger-print'),
-
-                                TextEntry::make('email')
-                                    ->label('Alamat Email')
-                                    ->icon('heroicon-m-envelope')
-                                    ->color('info')
-                                    ->url(fn($record) => "mailto:{$record->email}"),
 
                                 TextEntry::make('company.name')
                                     ->label('Perusahaan')
@@ -52,19 +46,6 @@ class EmployeeInfolist
                                 TextEntry::make('department.name')
                                     ->label('Departemen')
                                     ->weight(FontWeight::Medium),
-
-                                TextEntry::make('subDivision.name')
-                                    ->default('Tidak Ada Sub Divisi')
-                                    ->label('Sub-Divisi'),
-
-                                TextEntry::make('position_name')
-                                    ->label('Jabatan / Posisi')
-                                    ->badge()
-                                    ->color('gray'),
-
-                                TextEntry::make('job_grade_category')
-                                    ->label('Golongan / Grade')
-                                    ->icon('heroicon-m-academic-cap'),
                             ]),
                         ]),
                 ])->grow(),

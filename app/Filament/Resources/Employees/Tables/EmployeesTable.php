@@ -30,35 +30,19 @@ class EmployeesTable
                     ->copyable()
                     ->copyMessage('Nama disalin'),
 
-                TextColumn::make('email')
-                    ->label('Kontak')
-                    ->icon('heroicon-m-envelope')
-                    ->color('gray')
-                    ->searchable()
-                    ->toggleable(),
-
                 TextColumn::make('company.name')
                     ->label('Perusahaan')
                     ->searchable()
                     ->sortable()
                     ->badge()
-                    ->color('gray'), // Beri gaya badge agar terlihat rapi
+                    ->color('gray'),
 
-                // Penempatan Departemen & Sub-Divisi
+                // Kolom Departemen (Sub-Divisi dihilangkan)
                 TextColumn::make('department.name')
                     ->label('Unit Kerja')
-                    ->description(fn($record) => $record->subDivision->name ?? 'Tidak Ada Sub Divisi')
                     ->sortable()
                     ->searchable(),
 
-                // Jabatan dengan gaya Badge minimalis
-                TextColumn::make('position_name')
-                    ->label('Jabatan')
-                    ->badge()
-                    ->color('gray')
-                    ->searchable(),
-
-                // Status Kepegawaian dengan warna semantik
                 TextColumn::make('employment_status')
                     ->label('Status')
                     ->badge()
@@ -70,7 +54,6 @@ class EmployeesTable
                     })
                     ->sortable(),
 
-                // Indikator Aktif yang lebih menarik
                 IconColumn::make('is_active')
                     ->label('Aktif')
                     ->boolean()
@@ -78,7 +61,6 @@ class EmployeesTable
                     ->falseIcon('heroicon-o-x-circle')
                     ->alignCenter(),
 
-                // Kolom waktu yang disembunyikan secara default
                 TextColumn::make('created_at')
                     ->label('Tgl Bergabung')
                     ->dateTime('d M Y')

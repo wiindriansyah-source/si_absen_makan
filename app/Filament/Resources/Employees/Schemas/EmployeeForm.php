@@ -9,9 +9,9 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
-use Filament\Schemas\Components\Utilities\Get;
+// use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
-use Illuminate\Database\Eloquent\Builder;
+// use Illuminate\Database\Eloquent\Builder;
 
 class EmployeeForm
 {
@@ -39,18 +39,13 @@ class EmployeeForm
                                         ->required()
                                         ->prefixIcon('heroicon-m-identification'),
 
-                                    TextInput::make('email')
-                                        ->label('Alamat Email')
-                                        ->email()
-                                        ->placeholder('karyawan@indominco.com')
-                                        ->prefixIcon('heroicon-m-envelope'),
-
                                     Select::make('company_id')
                                         ->label('Perusahaan')
                                         ->placeholder('Pilih Perusahaan')
                                         ->relationship('company', 'name')
                                         ->searchable()
                                         ->preload()
+                                        ->columnSpanFull()
                                         ->required(),
                                 ]),
                             ]),
@@ -67,39 +62,7 @@ class EmployeeForm
                                         ->preload()
                                         ->required()
                                         ->native(false)
-                                        ->live() // Menjadikan input ini interaktif
                                         ->prefixIcon('heroicon-m-building-office'),
-
-                                    Select::make('sub_division_id')
-                                        ->label('Sub-Divisi')
-                                        ->relationship(
-                                            name: 'subDivision',
-                                            titleAttribute: 'name',
-                                            // Fitur Canggih: Hanya munculkan sub-divisi milik departemen terpilih
-                                            modifyQueryUsing: fn(Get $get, Builder $query) =>
-                                            $query->where('department_id', $get('department_id'))
-                                        )
-                                        ->searchable()
-                                        ->preload()
-                                        ->required()
-                                        ->native(false)
-                                        ->prefixIcon('heroicon-m-swatch'),
-
-                                    TextInput::make('position_name')
-                                        ->label('Jabatan')
-                                        ->placeholder('Contoh: Senior Supervisor')
-                                        ->prefixIcon('heroicon-m-user-group'),
-
-                                    Select::make('job_grade_category')
-                                        ->label('Golongan / Grade')
-                                        ->options([
-                                            'Staff' => 'Staff',
-                                            'Supervisor' => 'Supervisor',
-                                            'Manager' => 'Manager',
-                                            'Executive' => 'Executive',
-                                        ])
-                                        ->native(false)
-                                        ->prefixIcon('heroicon-m-academic-cap'),
                                 ]),
                             ]),
 

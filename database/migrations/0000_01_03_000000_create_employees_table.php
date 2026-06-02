@@ -14,12 +14,10 @@ return new class extends Migration {
             $table->id();
             $table->string('employee_no')->unique(); // NIK
             $table->string('name');
-            $table->string('email')->unique()->nullable();
             $table->foreignId('department_id')->nullable()->constrained('departments')->cascadeOnDelete();
             $table->string('position_name')->nullable();
             $table->string('employment_status')->nullable();
             $table->foreignId('company_id')->nullable()->constrained('companies')->cascadeOnDelete();
-            $table->string('job_grade_category')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

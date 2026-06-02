@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->foreignId('visitor_id')->nullable()->constrained();
             $table->string('meal_type'); // Kantin / Kotakan
             $table->string('meal_time'); // Pagi / Siang / Malam / Tengah Malam
-
             $table->string('satisfaction'); // Puas / Tidak Puas
             $table->text('feedback')->nullable();
             $table->timestamps();
