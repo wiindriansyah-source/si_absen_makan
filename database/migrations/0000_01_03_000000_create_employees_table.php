@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->string('employee_no')->unique(); // NIK
             $table->string('name');
             $table->foreignId('department_id')->nullable()->constrained('departments')->cascadeOnDelete();
-            $table->string('position_name')->nullable();
             $table->string('employment_status')->nullable();
             $table->foreignId('company_id')->nullable()->constrained('companies')->cascadeOnDelete();
             $table->boolean('is_active')->default(true);
