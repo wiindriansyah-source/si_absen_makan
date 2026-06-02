@@ -39,8 +39,7 @@ class EmployeeImporter extends Importer
                         'name' => trim($state),
                     ]);
                 })
-                ->requiredMapping()
-                ->rules(['required']),
+                ->requiredMapping(),
 
             ImportColumn::make('department')
                 ->label('Department')
