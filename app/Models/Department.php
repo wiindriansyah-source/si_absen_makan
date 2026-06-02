@@ -12,11 +12,6 @@ class Department extends Model
 
     protected $fillable = ['name'];
 
-    public function subDivisions(): HasMany
-    {
-        return $this->hasMany(SubDivision::class);
-    }
-
     public function employees(): HasMany
     {
         return $this->hasMany(Employee::class);

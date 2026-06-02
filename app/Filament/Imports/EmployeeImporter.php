@@ -2,6 +2,7 @@
 
 namespace App\Filament\Imports;
 
+use App\Models\Company;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\SubDivision;
@@ -30,10 +31,20 @@ class EmployeeImporter extends Importer
             ImportColumn::make('email')
                 ->label('Email'),
 
-            // CARA TERBAIK: Gunakan relationship dengan resolveUsing
+            // Tambahkan kolom Company
+            ImportColumn::make('company')
+                ->label('Company')
+                ->relationship(resolveUsing: function (string $state): ?Company {
+                    return Company::firstOrCreate([
+                        'name' => trim($state),
+                    ]);
+                })
+                ->requiredMapping()
+                ->rules(['required']),
+
             ImportColumn::make('department')
+                ->label('Department')
                 ->relationship(resolveUsing: function (string $state): ?Department {
-                    // Dokumentasi: resolveUsing harus mengembalikan record yang ditemukan/dibuat
                     return Department::firstOrCreate([
                         'name' => trim($state),
                     ]);
@@ -41,40 +52,7 @@ class EmployeeImporter extends Importer
                 ->requiredMapping()
                 ->rules(['required']),
 
-            ImportColumn::make('subDivision')
-                ->relationship(resolveUsing: function (?string $state, array $data): ?SubDivision {
-                    // 1. Cek apakah state kosong/null
-                    $subDivisionName = $state ? trim($state) : null;
-
-                    // JIKA KOSONG, kembalikan null agar data Employee tetap masuk tanpa SubDivision
-                    if (blank($subDivisionName)) {
-                        return null;
-                    }
-
-                    // 2. Ambil nama department dari data kolom lain (diperlukan untuk relasi)
-                    $deptName = $data['department'] ?? null;
-
-                    // Jika department tidak ada di CSV, kita tidak bisa buat SubDivision baru secara akurat
-                    if (! $deptName) {
-                        return null;
-                    }
-
-                    // Ambil ID Department yang sudah diproses atau ada di database
-                    $department = Department::where('name', trim($deptName))->first();
-
-                    // Jika department tidak ditemukan di DB, kita tidak bisa buat SubDivision
-                    if (! $department) {
-                        return null;
-                    }
-
-                    // 3. Jika semua data ada, baru lakukan firstOrCreate
-                    return SubDivision::firstOrCreate([
-                        'name' => $subDivisionName,
-                        'department_id' => $department->id,
-                    ]);
-                })
-                // Hapus atau ubah requiredMapping() jika kolom ini opsional
-                ->rules(['nullable']),
+            // Kolom SubDivision DIHAPUS dari sini
 
             ImportColumn::make('position_name')
                 ->label('Position Name'),
@@ -87,16 +65,13 @@ class EmployeeImporter extends Importer
 
             ImportColumn::make('is_active')
                 ->label('Is Active')
-                ->boolean() // Dokumentasi: built-in casting untuk boolean
+                ->boolean()
                 ->rules(['nullable', 'boolean']),
         ];
     }
 
     public function resolveRecord(): ?Employee
     {
-        // Dokumentasi: resolveRecord bertanggung jawab mengembalikan instance model.
-        // Karena relationship sudah ditangani di getColumns, kita cukup menggunakan firstOrNew.
-
         return Employee::firstOrNew([
             'employee_no' => (string) $this->data['employee_no'],
         ]);

@@ -17,7 +17,6 @@ class Employee extends Model
         'name',
         'email',
         'department_id',
-        'sub_division_id',
         'position_name',
         'employment_status',
         'job_grade_category',
@@ -28,11 +27,6 @@ class Employee extends Model
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
-    }
-
-    public function subDivision(): BelongsTo
-    {
-        return $this->belongsTo(SubDivision::class);
     }
 
     public function user(): HasOne

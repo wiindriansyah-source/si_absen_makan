@@ -45,7 +45,7 @@ class AdminPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login(Login::class)
             ->profile(EditProfile::class)
-            ->brandLogo('\images\logo\IMM LOGO (1).png')
+            ->brandLogo('\images\logo\logo_imm.png')
             ->brandLogoHeight('2.5rem')
             ->defaultThemeMode(ThemeMode::System)
             ->colors([
@@ -82,7 +82,7 @@ class AdminPanelProvider extends PanelProvider
                 AuthDesignerPlugin::make()
                     ->defaults(
                         fn($config) => $config
-                            ->media(asset('images/auth/public/images/auth/images-auth.jpg'))
+                            ->media(asset('/images/auth/background-auth.jpg'))
                             ->mediaPosition(MediaPosition::Left)
                             ->blur(0)
                             ->mediasize('70%')
