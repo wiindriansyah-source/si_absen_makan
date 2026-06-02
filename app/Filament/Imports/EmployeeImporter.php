@@ -28,9 +28,6 @@ class EmployeeImporter extends Importer
                 ->requiredMapping()
                 ->rules(['required']),
 
-            ImportColumn::make('email')
-                ->label('Email'),
-
             // Tambahkan kolom Company
             ImportColumn::make('company')
                 ->label('Company')
@@ -50,16 +47,8 @@ class EmployeeImporter extends Importer
                 ->requiredMapping()
                 ->rules(['required']),
 
-            // Kolom SubDivision DIHAPUS dari sini
-
-            ImportColumn::make('position_name')
-                ->label('Position Name'),
-
             ImportColumn::make('employment_status')
                 ->label('Employment Status'),
-
-            ImportColumn::make('job_grade_category')
-                ->label('Job Grade Category'),
 
             ImportColumn::make('is_active')
                 ->label('Is Active')
