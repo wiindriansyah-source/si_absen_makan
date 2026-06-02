@@ -38,8 +38,7 @@ class EmployeeImporter extends Importer
                     return Company::firstOrCreate([
                         'name' => trim($state),
                     ]);
-                })
-                ->requiredMapping(),
+                }),
 
             ImportColumn::make('department')
                 ->label('Department')
