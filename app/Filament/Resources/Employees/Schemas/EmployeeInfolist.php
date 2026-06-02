@@ -37,6 +37,11 @@ class EmployeeInfolist
                                     ->icon('heroicon-m-envelope')
                                     ->color('info')
                                     ->url(fn($record) => "mailto:{$record->email}"),
+
+                                TextEntry::make('company.name')
+                                    ->label('Perusahaan')
+                                    ->badge()
+                                    ->icon('heroicon-m-building-office'),
                             ]),
                         ]),
 

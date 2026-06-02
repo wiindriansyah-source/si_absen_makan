@@ -24,6 +24,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Enums\FontWeight;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use UnitEnum;
 
@@ -39,7 +40,7 @@ class MealAttendanceResource extends Resource
     protected static ?string $pluralLabel = 'Data Absensi Makan';
 
     // Mengelompokkan menu agar sidebar rapi
-    protected static string|UnitEnum|null  $navigationGroup = 'Laporan Harian';
+    protected static string|UnitEnum|null $navigationGroup = 'Laporan Harian';
 
     // Menampilkan jumlah absensi hari ini sebagai Badge di sidebar
     public static function getNavigationBadge(): ?string
@@ -277,7 +278,13 @@ class MealAttendanceResource extends Resource
                     ->color('gray'),
             ])
             ->filters([
-                //
+                SelectFilter::make('satisfaction')
+                    ->label('Filter Kepuasan')
+                    ->options([
+                        'Puas' => 'Puas',
+                        'Tidak Puas' => 'Tidak Puas',
+                    ])
+                    ->native(false),
             ])
             ->recordActions([
                 ActionGroup::make([

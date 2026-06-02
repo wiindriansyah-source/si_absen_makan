@@ -43,8 +43,15 @@ class EmployeeForm
                                         ->label('Alamat Email')
                                         ->email()
                                         ->placeholder('karyawan@indominco.com')
-                                        ->prefixIcon('heroicon-m-envelope')
-                                        ->columnSpanFull(),
+                                        ->prefixIcon('heroicon-m-envelope'),
+
+                                    Select::make('company_id')
+                                        ->label('Perusahaan')
+                                        ->placeholder('Pilih Perusahaan')
+                                        ->relationship('company', 'name')
+                                        ->searchable()
+                                        ->preload()
+                                        ->required(),
                                 ]),
                             ]),
 

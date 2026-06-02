@@ -37,6 +37,13 @@ class EmployeesTable
                     ->searchable()
                     ->toggleable(),
 
+                TextColumn::make('company.name')
+                    ->label('Perusahaan')
+                    ->searchable()
+                    ->sortable()
+                    ->badge()
+                    ->color('gray'), // Beri gaya badge agar terlihat rapi
+
                 // Penempatan Departemen & Sub-Divisi
                 TextColumn::make('department.name')
                     ->label('Unit Kerja')

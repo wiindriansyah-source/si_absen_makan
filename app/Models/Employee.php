@@ -21,6 +21,7 @@ class Employee extends Model
         'position_name',
         'employment_status',
         'job_grade_category',
+        'company_id',
         'is_active',
     ];
 
@@ -42,5 +43,10 @@ class Employee extends Model
     public function mealAttendances(): HasMany
     {
         return $this->hasMany(MealAttendance::class);
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
     }
 }

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -20,6 +19,7 @@ return new class extends Migration
             $table->foreignId('sub_division_id')->nullable()->constrained();
             $table->string('position_name')->nullable();
             $table->string('employment_status')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies')->cascadeOnDelete();
             $table->string('job_grade_category')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
