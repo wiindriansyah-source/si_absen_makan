@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,7 +12,7 @@ return new class extends Migration
     {
         Schema::create('meal_attendances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('employee_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('department_id')->nullable()->constrained(); // Denormalisasi untuk mempermudah reporting
             $table->foreignId('visitor_id')->nullable()->constrained();
             $table->string('meal_type'); // Kantin / Kotakan
